@@ -10,6 +10,7 @@ use Src\Shared\Domain\ValueObject\UserId;
 use Src\Transaction\Domain\ValueObject\TransactionAmount;
 use Src\Transaction\Domain\ValueObject\TransactionCode;
 use Src\Transaction\Domain\ValueObject\TransactionCreatedAt;
+use Src\Transaction\Domain\ValueObject\TransactionSource;
 use Src\Transaction\Domain\ValueObject\TransactionUpdatedAt;
 
 class Transaction
@@ -18,6 +19,7 @@ class Transaction
     private TransactionId $id;
     private TransactionCode $code;
     private TransactionAmount $amount;
+    private TransactionSource $source;
     private UserId $userId;
     private TransactionCreatedAt $createdAt;
     private TransactionUpdatedAt $updatedAt;
@@ -26,6 +28,7 @@ class Transaction
         TransactionId $id,
         TransactionCode $code,
         TransactionAmount $amount,
+        TransactionSource $source,
         UserId $userId,
         TransactionCreatedAt $createdAt,
         TransactionUpdatedAt $updatedAt
@@ -34,6 +37,7 @@ class Transaction
         $this->id = $id;
         $this->code = $code;
         $this->amount = $amount;
+        $this->source = $source;
         $this->userId = $userId;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
@@ -52,6 +56,11 @@ class Transaction
     public function amount(): TransactionAmount
     {
         return $this->amount;
+    }
+
+    public function source(): TransactionSource
+    {
+        return $this->source;
     }
 
     public function userId(): UserId
