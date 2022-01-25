@@ -1,66 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+![Logo of the project](https://cdn.bitpanda.com/media/redesign/bitpanda-logo.svg)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Bitpanda code assessment #2
 
-## About Laravel
+Isaac Boscà's solution for Bitpanda code assesment #2.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Getting Started
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The following software is necessary to run the project:
 
-## Learning Laravel
+- `PHP 8`
+- `Composer 2`
+- `Docker`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+I provided a convenient way to get up and running the project database using `Docker`.
+Not needed if there is another database ready on the system.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Installation
 
-## Laravel Sponsors
+Create a `.env` file from `.env.example`:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+$ cp .env.example .env
+```
 
-### Premium Partners
+Then run:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+```bash
+$ make install
+```
 
-## Contributing
+### Running the app
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+$ make run
+```
+After running this command, the app will be available at `http://localhost:8000`.
 
-## Code of Conduct
+## Tests
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+You can run the tests using the following command:
 
-## Security Vulnerabilities
+```bash
+$ make test
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Get a taste
 
-## License
+### Getting transactions from db source
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+`GET` http://localhost:8000/api/transactions?source=db
+
+### Getting transactions from csv source
+
+`GET` http://localhost:8000/api/transactions?source=csv
+
+
+## Considerations
+
+Main considerations has been already covered within the first Readme assessment.
+For more details about the structure and architecture, please, refer to previous assessment Readme file. 
+
+### Coupling Infrastructure to domain
+
+Unlike the previous code, where we were decoupling our domain from infrastructure using dependency inversion, now we are "knowing" our infrastructure from our domain.
+You can see this in TransactionRepositoryBySourceFactory, where instead of an interface, we are injecting directly the concrete implementations.
+
+This happens because the data source is not an implementation detail anymore.
+Since the end user has the chance to decide, these concrete implementations become to some extent, "part of our domain logic".
+
+My opinion here is to keep it as infrastructure, and create an interface for both implementations.
+This way we are still encapsulating the decision in the Factory, and after that, the code is working with a generic interface.
+If at some point the source is always the database, we will be able to switch really easily. 
+
+
+## Author
+
+### Isaac Boscà
+
+Website: [https://isaac.bosca.xyz/](https://isaac.bosca.xyz/)    
+LinkedIn: [https://www.linkedin.com/in/isaac-bosca/](https://www.linkedin.com/in/isaac-bosca/)    
+
