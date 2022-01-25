@@ -43,4 +43,9 @@ class TransactionSource extends StringValueObject
         return new self(self::TRANSACTION_SOURCE_DB);
     }
 
+    public static function csv(): self
+    {
+        return new self(self::TRANSACTION_SOURCE_CSV);
+    }
+
 }
