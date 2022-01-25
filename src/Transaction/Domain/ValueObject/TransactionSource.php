@@ -38,4 +38,9 @@ class TransactionSource extends StringValueObject
         }
     }
 
+    public static function database(): self
+    {
+        return new self(self::TRANSACTION_SOURCE_DB);
+    }
+
 }
