@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\DB;
 use Src\Transaction\Domain\Aggregate\Transaction;
 use Src\Transaction\Domain\Collection\TransactionCollection;
 use Src\Transaction\Domain\Repository\TransactionRepository;
-use Src\Transaction\Infrastructure\Persistence\Database\Mapper\TransactionMapper;
+use Src\Transaction\Infrastructure\Persistence\Database\Mapper\DatabaseTransactionMapper;
 use stdClass;
 
 class DatabaseTransactionRepository implements TransactionRepository
 {
 
     public function __construct(
-        private TransactionMapper $mapper
+        private DatabaseTransactionMapper $mapper
     ){}
 
     /**

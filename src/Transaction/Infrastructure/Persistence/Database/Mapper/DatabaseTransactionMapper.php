@@ -15,7 +15,7 @@ use Src\Transaction\Domain\ValueObject\TransactionCreatedAt;
 use Src\Transaction\Domain\ValueObject\TransactionSource;
 use Src\Transaction\Domain\ValueObject\TransactionUpdatedAt;
 
-class TransactionMapper
+class DatabaseTransactionMapper
 {
     /**
      * @param array $data
